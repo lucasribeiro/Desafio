@@ -38,7 +38,18 @@ namespace DesafioGeoAmbiente.Controllers
         {
             IList<Aluno> Alunos = new List<Aluno>();
 
-            var appdata = HttpContext.Server.MapPath("~/App_Data/Alunos.csv"); 
+            string appdata = string.Empty;
+
+            // Try colocado para rodar o Test. No teste não funciona o HttpContext
+            try
+            {
+
+                appdata = HttpContext.Server.MapPath("~/App_Data/Alunos.csv");
+            }
+            catch (Exception)
+            {
+                appdata = "Alunos.csv";
+            }
 
             StreamReader rd = new StreamReader(appdata);
             string linha = null;
