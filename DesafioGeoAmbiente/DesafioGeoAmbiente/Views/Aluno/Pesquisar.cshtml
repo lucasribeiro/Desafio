@@ -1,0 +1,78 @@
+﻿@model DesafioGeoAmbiente.Models.Aluno
+
+@{
+    ViewBag.Title = "Pesquisar";
+}
+
+<h2>Pesquisar</h2>
+
+@using (Html.BeginForm())
+{
+    <p>Digite o RA</p>
+    <input type="text" name="ra" id="ra" placeholder="Digite a pesquisa" />
+    <div><button type="submit">Filtrar</button></div>
+}
+
+<div>
+    <h4>Aluno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            
+                @Html.DisplayNameFor(model => model.lat)
+            
+        </dt>
+
+        <dd id="lat">            
+                @Html.DisplayFor(model => model.lat)        
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lon)
+        </dt>
+
+        <dd>
+            <div id="lon">
+                @Html.DisplayFor(model => model.lon)
+                </div>
+</dd>
+
+    </dl>
+</div>
+<div>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        function InicializaMapa() {
+           
+            var lat = document.getElementById("lat").innerHTML.replace(",", ".");
+            var lon = document.getElementById("lon").innerHTML.replace(",", ".");
+
+            var latlng = new google.maps.LatLng(lat, lon);
+            var opcoes = {
+                zoom: 16,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("mapa"), opcoes);
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: "Lucas"
+            });
+        }
+        window.onload = InicializaMapa;
+    </script>   
+    <div id="mapa" style="width: 600px; top: 179px; left: 472px; position: absolute; height: 400px"></div>
+</div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>

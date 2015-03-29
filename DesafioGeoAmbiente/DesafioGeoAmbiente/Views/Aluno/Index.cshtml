@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <p>Digite o nome</p>
+    <input type="text" name="texto" id="texto" placeholder="Digite a pesquisa" />
+    <div><button type="submit">Filtrar</button></div>
+}
+
